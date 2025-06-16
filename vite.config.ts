@@ -11,4 +11,10 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // GitHub Pages configuration
+  base: '/document-reader/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+  },
 })
