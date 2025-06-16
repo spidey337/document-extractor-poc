@@ -12,7 +12,7 @@ export default defineConfig({
     },
   },
   // GitHub Pages configuration
-  base: '/document-reader/',
+  base: '/document-extractor-poc/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',

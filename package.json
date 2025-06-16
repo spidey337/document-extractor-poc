@@ -1,9 +1,9 @@
 {
-  "name": "document-reader",
+  "name": "document-extractor-poc",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://spidey.github.io/document-reader/",
+  "homepage": "https://spidey.github.io/document-extractor-poc/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
