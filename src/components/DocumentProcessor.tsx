@@ -8,7 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useAppStore } from '@/store/useAppStore'
 import { DEFAULT_TEMPLATES } from '@/constants/defaultTemplates'
 import { GEMINI_MODELS, processDocument } from '@/lib/geminiApi'
-import { Loader2, Upload, Save, Eye, EyeOff } from 'lucide-react'
+import { Loader2, Upload, Save, Eye, EyeOff, BrainCog } from 'lucide-react'
 
 export default function DocumentProcessor() {
   // State management
@@ -200,43 +200,41 @@ export default function DocumentProcessor() {
                 <div className="space-y-4 pt-2">
                   {/* API Key */}
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Gemini API Key</label>
-                    <div className="relative">
-                      <Input
-                        type={showApiKey ? 'text' : 'password'}
-                        placeholder="Enter your Gemini API key"
-                        value={apiKey}
-                        onChange={(e) => setApiKey(e.target.value)}
-                        className="pr-10"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowApiKey(!showApiKey)}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-muted rounded"
-                      >
-                        {showApiKey ? <EyeOff size={16} /> : <Eye size={16} />}
-                      </button>
+                    <label className="text-sm font-medium">API Key</label>
+                    <div className="flex gap-2">
+                      <div className="relative flex-1 min-w-0">
+                        <Input
+                          type={showApiKey ? 'text' : 'password'}
+                          placeholder="Enter your AI API key"
+                          value={apiKey}
+                          onChange={(e) => setApiKey(e.target.value)}
+                          className="pr-10"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowApiKey(!showApiKey)}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-muted rounded"
+                        >
+                          {showApiKey ? <EyeOff size={16} /> : <Eye size={16} />}
+                        </button>
+                      </div>
+                      <Select value={selectedModel} onValueChange={setSelectedModel}>
+                        <SelectTrigger className="flex-shrink-0">
+                          {/* <SelectValue placeholder="Select a model" /> */}
+                          <Button variant="ghost"><BrainCog /></Button>
+                        </SelectTrigger>
+                        <SelectContent>
+                          {GEMINI_MODELS.map((model) => (
+                            <SelectItem key={model.id} value={model.id}>
+                              <div className="flex flex-col">
+                                <span className="font-medium">{model.name}</span>
+                                <span className="text-xs text-muted-foreground">{model.description}</span>
+                              </div>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
-                  </div>
-
-                  {/* Model Selection */}
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Gemini Model</label>
-                    <Select value={selectedModel} onValueChange={setSelectedModel}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a model" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {GEMINI_MODELS.map((model) => (
-                          <SelectItem key={model.id} value={model.id}>
-                            <div className="flex flex-col">
-                              <span className="font-medium">{model.name}</span>
-                              <span className="text-xs text-muted-foreground">{model.description}</span>
-                            </div>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
                   </div>
 
                   {/* Prompt */}
